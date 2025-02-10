@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="paneOrdersView" prefHeight="718.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mywork.controller.ViewOrdersController">
+   <children>
+      <HBox alignment="CENTER_LEFT" layoutX="94.0" layoutY="593.0" />
+      <TableView fx:id="tblOrdersView" layoutX="35.0" layoutY="116.0" onMouseClicked="#onClickTable" prefHeight="400.0" prefWidth="580.0">
+         <columns>
+            <TableColumn fx:id="colOrderId" prefWidth="75.0" text="Order Id" />
+            <TableColumn fx:id="colProductId" prefWidth="75.0" text="Product Id" />
+            <TableColumn fx:id="colDate" prefWidth="75.0" text="Date" />
+            <TableColumn fx:id="colQty" prefWidth="75.0" text="Qty" />
+            <TableColumn fx:id="colPrice" prefWidth="75.0" text="Price" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Text fill="#cd6161" layoutX="141.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View Orders" textAlignment="CENTER" wrappingWidth="388.53668212890625">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
