@@ -2,6 +2,7 @@ package com.example.mywork.DAO.custom.impl;
 
 import com.example.mywork.DAO.custom.CustomerDAO;
 import com.example.mywork.dto.CustomerDTO;
+import com.example.mywork.entity.Customer;
 import com.example.mywork.util.CrudUtil;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,7 +23,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         return "C001"; // Return the default customer ID if no data is found
     }
 
-    public boolean save(CustomerDTO customerDTO) throws SQLException {
+    public boolean save(Customer customerDTO) throws SQLException {
             return CrudUtil.execute(
                 "insert into customer values (?,?,?,?)",
                 customerDTO.getCustomerId(),
@@ -32,13 +33,13 @@ public class CustomerDAOImpl implements CustomerDAO {
         );
     }
 
-    public ArrayList<CustomerDTO> getAll() throws SQLException {
+    public ArrayList<Customer> getAll() throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from customer");
 
-        ArrayList<CustomerDTO> customerDTOS = new ArrayList<>();
+        ArrayList<Customer> customerDTOS = new ArrayList<>();
 
         while (rst.next()) {
-            CustomerDTO customerDTO = new CustomerDTO(
+            Customer customerDTO = new Customer(
                     rst.getString(1),  // Customer ID
                     rst.getString(2),  // Name
                     rst.getString(3),  // Address
@@ -49,7 +50,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         return customerDTOS;
     }
 
-    public boolean update(CustomerDTO customerDTO) throws SQLException {
+    public boolean update(Customer customerDTO) throws SQLException {
         return CrudUtil.execute(
                 "update customer set Name=?, Address=?, contact=? where custId=?",
                 customerDTO.getName(),

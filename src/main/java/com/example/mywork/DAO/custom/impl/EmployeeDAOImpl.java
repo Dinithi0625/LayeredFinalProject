@@ -2,6 +2,7 @@ package com.example.mywork.DAO.custom.impl;
 
 import com.example.mywork.DAO.custom.EmployeeDAO;
 import com.example.mywork.dto.EmployeeDTO;
+import com.example.mywork.entity.Employee;
 import com.example.mywork.util.CrudUtil;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,7 +23,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         return "E001"; // Return the default customer ID if no data is found
     }
 
-    public boolean save(EmployeeDTO employeeDTO) throws SQLException {
+    public boolean save(Employee employeeDTO) throws SQLException {
         return CrudUtil.execute(
                 "insert into employee values (?,?,?,?)",
                 employeeDTO.getEmployeeId(),
@@ -32,13 +33,13 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         );
     }
 
-    public ArrayList<EmployeeDTO> getAll() throws SQLException {
+    public ArrayList<Employee> getAll() throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from employee");
 
-        ArrayList<EmployeeDTO> employeeDTOS = new ArrayList<>();
+        ArrayList<Employee> employeeDTOS = new ArrayList<>();
 
         while (rst.next()) {
-            EmployeeDTO employeeDTO = new EmployeeDTO(
+            Employee employeeDTO = new Employee(
                     rst.getString(1),  // Customer ID
                     rst.getString(2),  // Name
                     rst.getString(3),  // Address
@@ -49,7 +50,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         return employeeDTOS;
     }
 
-    public boolean update(EmployeeDTO employeeDTO) throws SQLException {
+    public boolean update(Employee employeeDTO) throws SQLException {
         return CrudUtil.execute(
                 "update employee set name=?, address=?, contact=? where employeeId=?",
                 employeeDTO.getName(),

@@ -3,6 +3,7 @@ package com.example.mywork.DAO.custom.impl;
 import com.example.mywork.DAO.custom.MetirialDAO;
 import com.example.mywork.dto.CustomerDTO;
 import com.example.mywork.dto.MetirialDTO;
+import com.example.mywork.entity.Metirial;
 import com.example.mywork.util.CrudUtil;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,7 +24,7 @@ public class MetirialDAOImpl implements MetirialDAO {
         return "M001"; // Return the default customer ID if no data is found
     }
 
-    public boolean save(MetirialDTO metirialDTO) throws SQLException {
+    public boolean save(Metirial metirialDTO) throws SQLException {
         return CrudUtil.execute(
                 "insert into metirial values (?,?,?)",
                 metirialDTO.getMetirialId(),
@@ -32,12 +33,12 @@ public class MetirialDAOImpl implements MetirialDAO {
         );
     }
 
-    public ArrayList<MetirialDTO> getAll() throws SQLException {
+    public ArrayList<Metirial> getAll() throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from metirial");
 
-        ArrayList<MetirialDTO> list = new ArrayList<>();
+        ArrayList<Metirial> list = new ArrayList<>();
         while (rst.next()) {
-            MetirialDTO metirialDTO = new MetirialDTO(
+            Metirial metirialDTO = new Metirial(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3)
@@ -52,7 +53,7 @@ public class MetirialDAOImpl implements MetirialDAO {
         return null;
     }
 
-    public boolean update(MetirialDTO metirialDTO) throws SQLException {
+    public boolean update(Metirial metirialDTO) throws SQLException {
         return CrudUtil.execute(
                 "update metirial set  name=?, qty=? where metirialId=?",
                 metirialDTO.getName(),

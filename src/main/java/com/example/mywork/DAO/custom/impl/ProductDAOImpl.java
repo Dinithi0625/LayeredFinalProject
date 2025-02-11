@@ -2,6 +2,7 @@ package com.example.mywork.DAO.custom.impl;
 import com.example.mywork.DAO.custom.ProductDAO;
 import com.example.mywork.db.DBConnection;
 import com.example.mywork.dto.ProductDTO;
+import com.example.mywork.entity.Product;
 import com.example.mywork.util.CrudUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -44,7 +45,7 @@ public class ProductDAOImpl implements ProductDAO {
         return "P001"; // Return the default customer ID if no data is found
     }
 
-    public boolean save(ProductDTO productDTO) throws SQLException {
+    public boolean save(Product productDTO) throws SQLException {
         return CrudUtil.execute(
                 "insert into product values (?,?,?,?,?)",
                 productDTO.getProductId(),
@@ -55,13 +56,13 @@ public class ProductDAOImpl implements ProductDAO {
         );
     }
 
-    public ArrayList<ProductDTO> getAll() throws SQLException {
+    public ArrayList<Product> getAll() throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from product");
 
-        ArrayList<ProductDTO> productDTOS = new ArrayList<>();
+        ArrayList<Product> productDTOS = new ArrayList<>();
 
         while (rst.next()) {
-            ProductDTO productDTO = new ProductDTO(
+            Product productDTO = new Product(
                     rst.getString(1),  // Customer ID
                     rst.getString(2),  // Name
                     rst.getDouble(3),  // Address
@@ -78,7 +79,7 @@ public class ProductDAOImpl implements ProductDAO {
         return null;
     }
 
-    public boolean update(ProductDTO productDTO) throws SQLException {
+    public boolean update(Product productDTO) throws SQLException {
         return CrudUtil.execute(
                 "update product set name=?, price=?, description=? , qty = ? where productId=?",
                 productDTO.getName(),
