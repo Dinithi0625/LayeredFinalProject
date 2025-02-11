@@ -1,12 +1,9 @@
 package com.example.mywork.DAO.custom;
 import com.example.mywork.DAO.CrudDAO;
-import com.example.mywork.dto.CustomerDTO;
-
-import javax.xml.stream.events.DTD;
+import com.example.mywork.entity.Customer;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-public interface CustomerDAO extends CrudDAO<CustomerDTO> {
+public interface CustomerDAO extends CrudDAO<Customer> {
     String getNextCustomerId() throws SQLException;
 
 }
