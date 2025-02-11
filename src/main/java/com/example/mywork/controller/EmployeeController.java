@@ -71,7 +71,6 @@ public class EmployeeController {
         }
     }
 
-
     private void refreshPage() throws SQLException {
 
         try {
@@ -81,7 +80,6 @@ public class EmployeeController {
             throw new RuntimeException(e);
         }
         btnSave.setDisable(false);
-
         btnUpdate.setDisable(true);
         btnDelete.setDisable(true);
 

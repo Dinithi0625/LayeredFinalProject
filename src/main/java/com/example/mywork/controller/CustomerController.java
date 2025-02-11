@@ -1,7 +1,4 @@
 package com.example.mywork.controller;
-import com.example.mywork.DAO.DAOFactory;
-import com.example.mywork.DAO.custom.CustomerDAO;
-import com.example.mywork.DAO.custom.impl.CustomerDAOImpl;
 import com.example.mywork.bo.BOFactory;
 import com.example.mywork.bo.custom.CustomerBO;
 import com.example.mywork.db.DBConnection;

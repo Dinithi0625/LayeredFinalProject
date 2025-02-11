@@ -1,10 +1,8 @@
 package com.example.mywork.bo.custom.impl;
-
 import com.example.mywork.DAO.DAOFactory;
 import com.example.mywork.DAO.custom.CustomerDAO;
 import com.example.mywork.bo.custom.CustomerBO;
 import com.example.mywork.dto.CustomerDTO;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 

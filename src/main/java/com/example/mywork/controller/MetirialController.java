@@ -2,6 +2,8 @@ package com.example.mywork.controller;
 
 import com.example.mywork.DAO.DAOFactory;
 import com.example.mywork.DAO.custom.MetirialDAO;
+import com.example.mywork.bo.BOFactory;
+import com.example.mywork.bo.custom.MetirialBO;
 import com.example.mywork.dto.MetirialDTO;
 import com.example.mywork.dto.tm.MetirialTM;
 import com.example.mywork.DAO.custom.impl.MetirialDAOImpl;
@@ -52,7 +54,7 @@ public class MetirialController {
     @FXML
     private Label lblMetirialId;
 
-    MetirialDAO metirialDAO = (MetirialDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.METIRIAL);
+    MetirialBO metirialBO = (MetirialBO) BOFactory.getInstance().getBO(BOFactory.BOType.METIRIAL);
 
     public void initialize() {
         colMetirialId.setCellValueFactory(new PropertyValueFactory<>("metirialId"));
@@ -84,7 +86,7 @@ public class MetirialController {
     MetirialDAOImpl metirialModel = new MetirialDAOImpl();
 
     private void loadTableData() throws SQLException {
-        ArrayList<MetirialDTO> metirialDTOS = metirialDAO.getAll();
+        ArrayList<MetirialDTO> metirialDTOS = metirialBO.getAll();
 
         ObservableList<MetirialTM> metirialTMS = FXCollections.observableArrayList();
 
@@ -102,7 +104,7 @@ public class MetirialController {
     }
 
     public void loadNextMetirialId() throws SQLException {
-        String nextMetirialId = metirialDAO.getNextMetirialId();
+        String nextMetirialId = metirialBO.getNextMetirialId();
         lblMetirialId.setText(nextMetirialId);
     }
 
@@ -134,7 +136,7 @@ public class MetirialController {
 
         MetirialDTO dto = new MetirialDTO(metirialId , name , qty);
 
-        boolean isDeleted = metirialDAO.delete(metirialId);
+        boolean isDeleted = metirialBO.delete(metirialId);
 
         if (isDeleted) {
             refreshPage();
@@ -172,7 +174,7 @@ public class MetirialController {
 
         MetirialDTO dto = new MetirialDTO(metirialId,name,qty);
 
-        boolean isSaved = metirialDAO.save(dto);
+        boolean isSaved = metirialBO.save(dto);
         if (isSaved) {
             refreshPage();
             new Alert(Alert.AlertType.INFORMATION, "Metirial saved...!").show();
@@ -208,7 +210,7 @@ public class MetirialController {
 
         MetirialDTO dto = new MetirialDTO(metirialId,name,qty);
 
-        boolean isUpdate = metirialDAO.update(dto);
+        boolean isUpdate = metirialBO.update(dto);
         if (isUpdate) {
             refreshPage();
             new Alert(Alert.AlertType.INFORMATION, "Metirial updated...!").show();
