@@ -1,4 +1,7 @@
 package com.example.mywork.bo.custom.impl;
 
-public interface MetirialBOimpl {
+import com.example.mywork.bo.custom.MetirialBO;
+
+public class MetirialBOimpl implements MetirialBO {
+
 }

@@ -1,6 +1,6 @@
 package com.example.mywork.controller;
-import com.example.mywork.DAO.DAOFactory;
-import com.example.mywork.DAO.custom.EmployeeDAO;
+import com.example.mywork.bo.BOFactory;
+import com.example.mywork.bo.custom.EmployeeBO;
 import com.example.mywork.dto.EmployeeDTO;
 import com.example.mywork.dto.tm.EmployeeTM;
 import com.example.mywork.DAO.custom.impl.EmployeeDAOImpl;
@@ -56,8 +56,7 @@ public class EmployeeController {
     @FXML
     private TextField txtName;
 
-    EmployeeDAO employeeDAO = (EmployeeDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.EMPLOYEE);
-
+    EmployeeBO employeeBO = (EmployeeBO) BOFactory.getInstance().getBO(BOFactory.BOType.EMPLOYEE);
 
     public void initialize() {
         colEmployeeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
@@ -94,7 +93,7 @@ public class EmployeeController {
     EmployeeDAOImpl employeeModel = new EmployeeDAOImpl();
 
     private void loadTableData() throws SQLException {
-        ArrayList<EmployeeDTO> employeeDTOS = employeeDAO.getAll();
+        ArrayList<EmployeeDTO> employeeDTOS = employeeBO.getAll();
 
         ObservableList<EmployeeTM> employeeTMS = FXCollections.observableArrayList();
 
@@ -113,7 +112,7 @@ public class EmployeeController {
     }
 
     public void loadNextEmployeeId() throws SQLException {
-        String nextCustomerId = employeeDAO.getNextEmployeeId();
+        String nextCustomerId = employeeBO.getNextEmployeeId();
         lblEmployeeId.setText(nextCustomerId);
     }
 
@@ -154,7 +153,7 @@ public class EmployeeController {
         }
 
         EmployeeDTO dto = new EmployeeDTO(employeeId,name,address,phone);
-        boolean isDeleted = employeeDAO.delete(employeeId);
+        boolean isDeleted = employeeBO.delete(employeeId);
 
         if (isDeleted) {
             refreshPage();
@@ -202,7 +201,7 @@ public class EmployeeController {
 
         EmployeeDTO dto = new EmployeeDTO(employeeId,name,address,phone);
 
-        boolean isSaved = employeeDAO.save(dto);
+        boolean isSaved = employeeBO.save(dto);
         if (isSaved) {
             refreshPage();
             new Alert(Alert.AlertType.INFORMATION, "Employee saved...!").show();
@@ -249,7 +248,7 @@ public class EmployeeController {
 
         EmployeeDTO dto = new EmployeeDTO(employeeId,name,address,phone);
 
-        boolean isUpdted = employeeDAO.update(dto);
+        boolean isUpdted = employeeBO.update(dto);
         if (isUpdted) {
             refreshPage();
             new Alert(Alert.AlertType.INFORMATION, "Employee Updated...!").show();
@@ -275,5 +274,4 @@ public class EmployeeController {
         }
 
     }
-
 }

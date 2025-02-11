@@ -2,6 +2,8 @@ package com.example.mywork.controller;
 import com.example.mywork.DAO.DAOFactory;
 import com.example.mywork.DAO.custom.CustomerDAO;
 import com.example.mywork.DAO.custom.impl.CustomerDAOImpl;
+import com.example.mywork.bo.BOFactory;
+import com.example.mywork.bo.custom.CustomerBO;
 import com.example.mywork.db.DBConnection;
 import com.example.mywork.dto.CustomerDTO;
 import com.example.mywork.dto.tm.CustomerTM;
@@ -60,7 +62,7 @@ public class CustomerController {
     @FXML
     private TextField txtName;
 
-    CustomerDAO customerDAO = (CustomerDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.CUSTOMER);
+    CustomerBO customerBO = (CustomerBO) BOFactory.getInstance().getBO(BOFactory.BOType.CUSTOMER);
 
     public void initialize() {
         colCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
@@ -90,10 +92,10 @@ public class CustomerController {
         txtContact.setText("");
     }
 
-  //  CustomerDAOImpl customerModel = new CustomerDAOImpl();
+    //  CustomerDAOImpl customerModel = new CustomerDAOImpl();
 
     private void loadTableData() throws SQLException {
-        ArrayList<CustomerDTO> customerDTOS = customerDAO.getAll();
+        ArrayList<CustomerDTO> customerDTOS = customerBO.getAll();
         ObservableList<CustomerTM> customerTMS = FXCollections.observableArrayList();
         for (CustomerDTO customerDTO : customerDTOS) {
             CustomerTM customerTM = new CustomerTM(
@@ -108,7 +110,7 @@ public class CustomerController {
     }
 
     public void loadNextCustomerId() throws SQLException {
-        String nextCustomerId = customerDAO.getNextCustomerId();
+        String nextCustomerId = customerBO.getNextCustomerId();
         lblCustomerId.setText(nextCustomerId);
     }
 
@@ -146,13 +148,13 @@ public class CustomerController {
         }
 
         CustomerDTO dto = new CustomerDTO(customerId,name,address,phone);
-            boolean isSaved = customerDAO.save(dto);
-            if (isSaved) {
-                refreshPage();
-                new Alert(Alert.AlertType.INFORMATION, "Customer saved...!").show();
-            } else {
-                new Alert(Alert.AlertType.ERROR, "Fail to save customer...!").show();
-            }
+        boolean isSaved = customerBO.save(dto);
+        if (isSaved) {
+            refreshPage();
+            new Alert(Alert.AlertType.INFORMATION, "Customer saved...!").show();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Fail to save customer...!").show();
+        }
     }
 
 
@@ -190,7 +192,7 @@ public class CustomerController {
 
         CustomerDTO dto = new CustomerDTO(customerId,name,address,phone);
 
-        boolean isSaved = customerDAO.update(dto);
+        boolean isSaved = customerBO.update(dto);
         if (isSaved) {
             refreshPage();
             new Alert(Alert.AlertType.INFORMATION, "Customer Updated...!").show();
@@ -232,7 +234,7 @@ public class CustomerController {
         }
 
         CustomerDTO dto = new CustomerDTO(customerId,name,address,phone);
-        boolean isDeleted = customerDAO.delete(customerId);
+        boolean isDeleted = customerBO.delete(customerId);
 
         if (isDeleted) {
             refreshPage();

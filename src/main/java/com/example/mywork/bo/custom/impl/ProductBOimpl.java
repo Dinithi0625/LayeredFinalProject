@@ -1,6 +1,7 @@
 package com.example.mywork.bo.custom.impl;
 
-import com.example.mywork.bo.SuperBO;
+import com.example.mywork.bo.custom.ProductBO;
 
-public interface ProductBOimpl implements SuperBO {
+public class ProductBOimpl implements ProductBO {
+
 }
