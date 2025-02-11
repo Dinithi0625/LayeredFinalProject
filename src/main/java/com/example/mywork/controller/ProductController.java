@@ -2,6 +2,8 @@ package com.example.mywork.controller;
 import com.example.mywork.DAO.DAOFactory;
 import com.example.mywork.DAO.custom.ProductDAO;
 import com.example.mywork.DAO.custom.impl.ProductDAOImpl;
+import com.example.mywork.bo.BOFactory;
+import com.example.mywork.bo.custom.ProductBO;
 import com.example.mywork.db.DBConnection;
 import com.example.mywork.dto.ProductDTO;
 import com.example.mywork.dto.tm.ProductTM;
@@ -68,7 +70,7 @@ public class ProductController {
     @FXML
     private TextField txtPrice;
 
-    ProductDAO productDAO = (ProductDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.PRODUCT);
+    ProductBO productBO = (ProductBO) BOFactory.getInstance().getBO(BOFactory.BOType.PRODUCT);
 
     public void initialize() {
         colItemId.setCellValueFactory(new PropertyValueFactory<>("productId"));
@@ -87,7 +89,7 @@ public class ProductController {
 
     private void refreshPage() throws SQLException {
         try {
-             loadNextProductId();
+            loadNextProductId();
             loadTableData();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -101,10 +103,10 @@ public class ProductController {
         txtDescription.setText("");
     }
 
-   // ProductDAOImpl productModel = new ProductDAOImpl();
+    // ProductDAOImpl productModel = new ProductDAOImpl();
 
     private void loadTableData() throws SQLException {
-        ArrayList<ProductDTO> productDTOS = productDAO.getAll();
+        ArrayList<ProductDTO> productDTOS = productBO.getAll();
         ObservableList<ProductTM> productTMS = FXCollections.observableArrayList();
         for (ProductDTO productDTO : productDTOS) {
             ProductTM productTM = new ProductTM(
@@ -120,7 +122,7 @@ public class ProductController {
     }
 
     public void loadNextProductId() throws SQLException {
-        String nextProductId = productDAO.getNextProductId();
+        String nextProductId = productBO.getNextProductId();
         lblProductId.setText(nextProductId);
     }
 
@@ -154,7 +156,7 @@ public class ProductController {
         }
 
         ProductDTO dto = new ProductDTO(productId, name, price, description,qty);
-        boolean isDeleted = productDAO.delete(productId);
+        boolean isDeleted = productBO.delete(productId);
 
         if (isDeleted) {
             refreshPage();
@@ -194,7 +196,7 @@ public class ProductController {
         }
 
         ProductDTO dto = new ProductDTO(productId, name, price, description,qty);
-        boolean isSaved = productDAO.save(dto);
+        boolean isSaved = productBO.save(dto);
 
         if (isSaved) {
             refreshPage();
@@ -234,7 +236,7 @@ public class ProductController {
         }
 
         ProductDTO dto = new ProductDTO(productId, name, price, description,qty);
-        boolean isDeleted = productDAO.update(dto);
+        boolean isDeleted = productBO.update(dto);
 
         if (isDeleted) {
             refreshPage();
@@ -273,5 +275,4 @@ public class ProductController {
             btnUpdateItem.setDisable(false);
         }
     }
-
 }
