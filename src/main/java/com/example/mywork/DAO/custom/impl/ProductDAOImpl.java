@@ -2,9 +2,7 @@ package com.example.mywork.DAO.custom.impl;
 import com.example.mywork.DAO.SqlUtil;
 import com.example.mywork.DAO.custom.ProductDAO;
 import com.example.mywork.db.DBConnection;
-import com.example.mywork.dto.ProductDTO;
 import com.example.mywork.entity.Product;
-import com.example.mywork.util.CrudUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ProductDAOImpl implements ProductDAO {
-
 
     public double getProductPrice(String productId) throws SQLException {
         String query = "SELECT price FROM product WHERE productId = ?";
@@ -63,11 +60,11 @@ public class ProductDAOImpl implements ProductDAO {
 
         while (rst.next()) {
             Product productDTO = new Product(
-                    rst.getString(1),  // Customer ID
-                    rst.getString(2),  // Name
-                    rst.getDouble(3),  // Address
+                    rst.getString(1),
+                    rst.getString(2),
+                    rst.getDouble(3),
                     rst.getString(4),
-                    rst.getInt(5)// Contact
+                    rst.getInt(5)
             );
             productDTOS.add(productDTO);
         }

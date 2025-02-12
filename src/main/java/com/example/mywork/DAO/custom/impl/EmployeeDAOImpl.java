@@ -1,16 +1,12 @@
 package com.example.mywork.DAO.custom.impl;
-
 import com.example.mywork.DAO.SqlUtil;
 import com.example.mywork.DAO.custom.EmployeeDAO;
-import com.example.mywork.dto.EmployeeDTO;
 import com.example.mywork.entity.Employee;
-import com.example.mywork.util.CrudUtil;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
-
 
     public String getNextEmployeeId() throws SQLException {
         ResultSet rst = SqlUtil.execute("select employeeId from employee order by employeeId desc limit 1");
@@ -42,10 +38,10 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
         while (rst.next()) {
             Employee employeeDTO = new Employee(
-                    rst.getString(1),  // Customer ID
-                    rst.getString(2),  // Name
-                    rst.getString(3),  // Address
-                    rst.getString(4)   // Contact
+                    rst.getString(1),
+                    rst.getString(2),
+                    rst.getString(3),
+                    rst.getString(4)
             );
             employeeDTOS.add(employeeDTO);
         }

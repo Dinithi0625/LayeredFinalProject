@@ -5,11 +5,11 @@ import com.example.mywork.DAO.custom.MetirialDAO;
 import com.example.mywork.bo.custom.MetirialBO;
 import com.example.mywork.dto.MetirialDTO;
 import com.example.mywork.entity.Metirial;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class MetirialBOimpl implements MetirialBO {
+
     MetirialDAO metirialDAO = (MetirialDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.METIRIAL);
 
     @Override

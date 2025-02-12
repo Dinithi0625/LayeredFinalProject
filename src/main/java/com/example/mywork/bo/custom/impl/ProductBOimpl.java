@@ -5,12 +5,10 @@ import com.example.mywork.DAO.custom.ProductDAO;
 import com.example.mywork.bo.custom.ProductBO;
 import com.example.mywork.dto.ProductDTO;
 import com.example.mywork.entity.Product;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ProductBOimpl implements ProductBO {
-
 
     ProductDAO productDAO = (ProductDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.PRODUCT);
 

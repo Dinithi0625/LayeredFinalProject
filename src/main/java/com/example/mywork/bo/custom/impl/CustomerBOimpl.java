@@ -4,12 +4,10 @@ import com.example.mywork.DAO.custom.CustomerDAO;
 import com.example.mywork.bo.custom.CustomerBO;
 import com.example.mywork.dto.CustomerDTO;
 import com.example.mywork.entity.Customer;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CustomerBOimpl implements CustomerBO {
-
 
     CustomerDAO customerDAO = (CustomerDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.CUSTOMER);
 

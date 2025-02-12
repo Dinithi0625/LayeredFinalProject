@@ -1,11 +1,7 @@
 package com.example.mywork.DAO.custom.impl;
-
 import com.example.mywork.DAO.SqlUtil;
 import com.example.mywork.DAO.custom.MetirialDAO;
-import com.example.mywork.dto.CustomerDTO;
-import com.example.mywork.dto.MetirialDTO;
 import com.example.mywork.entity.Metirial;
-import com.example.mywork.util.CrudUtil;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -32,7 +28,6 @@ public class MetirialDAOImpl implements MetirialDAO {
                 metirialDTO.getQty()
         );
     }
-
     public ArrayList<Metirial> getAll() throws SQLException {
         ResultSet rst = SqlUtil.execute("select * from metirial");
         ArrayList<Metirial> list = new ArrayList<>();
