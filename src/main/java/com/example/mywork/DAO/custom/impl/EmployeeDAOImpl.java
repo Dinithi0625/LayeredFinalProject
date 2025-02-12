@@ -1,5 +1,6 @@
 package com.example.mywork.DAO.custom.impl;
 
+import com.example.mywork.DAO.SqlUtil;
 import com.example.mywork.DAO.custom.EmployeeDAO;
 import com.example.mywork.dto.EmployeeDTO;
 import com.example.mywork.entity.Employee;
@@ -10,21 +11,22 @@ import java.util.ArrayList;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
 
+
     public String getNextEmployeeId() throws SQLException {
-        ResultSet rst = CrudUtil.execute("select employeeId from employee order by employeeId desc limit 1");
+        ResultSet rst = SqlUtil.execute("select employeeId from employee order by employeeId desc limit 1");
 
         if (rst.next()) {
-            String lastId = rst.getString(1); // Last customer ID
-            String substring = lastId.substring(1); // Extract the numeric part
-            int i = Integer.parseInt(substring); // Convert the numeric part to integer
-            int newIdIndex = i + 1; // Increment the number by 1
-            return String.format("E%03d", newIdIndex); // Return the new customer ID in format Cnnn
+            String lastId = rst.getString(1);
+            String substring = lastId.substring(1);
+            int i = Integer.parseInt(substring);
+            int newIdIndex = i + 1;
+            return String.format("E%03d", newIdIndex);
         }
-        return "E001"; // Return the default customer ID if no data is found
+        return "E001";
     }
 
     public boolean save(Employee employeeDTO) throws SQLException {
-        return CrudUtil.execute(
+        return SqlUtil.execute(
                 "insert into employee values (?,?,?,?)",
                 employeeDTO.getEmployeeId(),
                 employeeDTO.getName(),
@@ -34,7 +36,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     public ArrayList<Employee> getAll() throws SQLException {
-        ResultSet rst = CrudUtil.execute("select * from employee");
+        ResultSet rst = SqlUtil.execute("select * from employee");
 
         ArrayList<Employee> employeeDTOS = new ArrayList<>();
 
@@ -51,7 +53,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     public boolean update(Employee employeeDTO) throws SQLException {
-        return CrudUtil.execute(
+        return SqlUtil.execute(
                 "update employee set name=?, address=?, contact=? where employeeId=?",
                 employeeDTO.getName(),
                 employeeDTO.getAddress(),
@@ -62,11 +64,11 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 
     public boolean delete(String employeeId) throws SQLException {
-        return CrudUtil.execute("delete from employee where employeeId=?", employeeId);
+        return SqlUtil.execute("delete from employee where employeeId=?", employeeId);
     }
 
     public ArrayList<String> getAllIds() throws SQLException {
-        ResultSet rst = CrudUtil.execute("select employeeId from employee");
+        ResultSet rst = SqlUtil.execute("select employeeId from employee");
 
         ArrayList<String> employeeIds = new ArrayList<>();
 

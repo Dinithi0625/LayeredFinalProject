@@ -1,5 +1,6 @@
 package com.example.mywork.DAO.custom.impl;
 
+import com.example.mywork.DAO.SqlUtil;
 import com.example.mywork.DAO.custom.MetirialDAO;
 import com.example.mywork.dto.CustomerDTO;
 import com.example.mywork.dto.MetirialDTO;
@@ -10,22 +11,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class MetirialDAOImpl implements MetirialDAO {
-
     public String getNextMetirialId() throws SQLException {
-        ResultSet rst = CrudUtil.execute("select metirialId from metirial order by metirialId desc limit 1");
+        ResultSet rst = SqlUtil.execute("select metirialId from metirial order by metirialId desc limit 1");
 
         if (rst.next()) {
-            String lastId = rst.getString(1); // Last customer ID
-            String substring = lastId.substring(1); // Extract the numeric part
-            int i = Integer.parseInt(substring); // Convert the numeric part to integer
-            int newIdIndex = i + 1; // Increment the number by 1
-            return String.format("M%03d", newIdIndex); // Return the new customer ID in format Cnnn
+            String lastId = rst.getString(1);
+            String substring = lastId.substring(1);
+            int i = Integer.parseInt(substring);
+            int newIdIndex = i + 1;
+            return String.format("M%03d", newIdIndex);
         }
-        return "M001"; // Return the default customer ID if no data is found
+        return "M001";
     }
 
     public boolean save(Metirial metirialDTO) throws SQLException {
-        return CrudUtil.execute(
+        return SqlUtil.execute(
                 "insert into metirial values (?,?,?)",
                 metirialDTO.getMetirialId(),
                 metirialDTO.getName(),
@@ -34,8 +34,7 @@ public class MetirialDAOImpl implements MetirialDAO {
     }
 
     public ArrayList<Metirial> getAll() throws SQLException {
-        ResultSet rst = CrudUtil.execute("select * from metirial");
-
+        ResultSet rst = SqlUtil.execute("select * from metirial");
         ArrayList<Metirial> list = new ArrayList<>();
         while (rst.next()) {
             Metirial metirialDTO = new Metirial(
@@ -54,7 +53,7 @@ public class MetirialDAOImpl implements MetirialDAO {
     }
 
     public boolean update(Metirial metirialDTO) throws SQLException {
-        return CrudUtil.execute(
+        return SqlUtil.execute(
                 "update metirial set  name=?, qty=? where metirialId=?",
                 metirialDTO.getName(),
                 metirialDTO.getQty(),
@@ -63,8 +62,9 @@ public class MetirialDAOImpl implements MetirialDAO {
     }
 
     public boolean delete(String metirialId) throws SQLException {
-        return CrudUtil.execute("delete from metirial where metirialId=?", metirialId);
+        return SqlUtil.execute("delete from metirial where metirialId=?", metirialId);
     }
+
 
 }
 

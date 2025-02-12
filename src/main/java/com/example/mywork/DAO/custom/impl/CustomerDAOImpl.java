@@ -1,5 +1,6 @@
 package com.example.mywork.DAO.custom.impl;
 
+import com.example.mywork.DAO.SqlUtil;
 import com.example.mywork.DAO.custom.CustomerDAO;
 import com.example.mywork.dto.CustomerDTO;
 import com.example.mywork.entity.Customer;
@@ -11,20 +12,21 @@ import java.util.ArrayList;
 public class CustomerDAOImpl implements CustomerDAO {
 
     public String getNextCustomerId() throws SQLException {
-        ResultSet rst = CrudUtil.execute("select custId from customer order by custId desc limit 1");
+
+        ResultSet rst = SqlUtil.execute("select custId from customer order by custId desc limit 1");
 
         if (rst.next()) {
-            String lastId = rst.getString(1); // Last customer ID
-            String substring = lastId.substring(1); // Extract the numeric part
-            int i = Integer.parseInt(substring); // Convert the numeric part to integer
-            int newIdIndex = i + 1; // Increment the number by 1
-            return String.format("C%03d", newIdIndex); // Return the new customer ID in format Cnnn
+            String lastId = rst.getString(1);
+            String substring = lastId.substring(1);
+            int i = Integer.parseInt(substring);
+            int newIdIndex = i + 1;
+            return String.format("C%03d", newIdIndex);
         }
-        return "C001"; // Return the default customer ID if no data is found
+        return "C001";
     }
 
     public boolean save(Customer customerDTO) throws SQLException {
-            return CrudUtil.execute(
+        return SqlUtil.execute(
                 "insert into customer values (?,?,?,?)",
                 customerDTO.getCustomerId(),
                 customerDTO.getName(),
@@ -34,8 +36,8 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     public ArrayList<Customer> getAll() throws SQLException {
-        ResultSet rst = CrudUtil.execute("select * from customer");
 
+        ResultSet rst = SqlUtil.execute("select * from customer");
         ArrayList<Customer> customerDTOS = new ArrayList<>();
 
         while (rst.next()) {
@@ -51,7 +53,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     public boolean update(Customer customerDTO) throws SQLException {
-        return CrudUtil.execute(
+        return SqlUtil.execute(
                 "update customer set Name=?, Address=?, contact=? where custId=?",
                 customerDTO.getName(),
                 customerDTO.getAddress(),
@@ -61,18 +63,17 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     public boolean delete(String customerId) throws SQLException {
-        return CrudUtil.execute("delete from customer where custId=?", customerId);
+        return SqlUtil.execute("delete from customer where custId=?", customerId);
     }
 
     public ArrayList<String> getAllIds() throws SQLException {
-        ResultSet rst = CrudUtil.execute("select custId from customer");
 
+        ResultSet rst = SqlUtil.execute("select custId from customer");
         ArrayList<String> customerIds = new ArrayList<>();
 
         while (rst.next()) {
             customerIds.add(rst.getString(1));
         }
-
         return customerIds;
     }
 }

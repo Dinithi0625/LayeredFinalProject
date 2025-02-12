@@ -1,4 +1,5 @@
 package com.example.mywork.DAO.custom.impl;
+import com.example.mywork.DAO.SqlUtil;
 import com.example.mywork.DAO.custom.ProductDAO;
 import com.example.mywork.db.DBConnection;
 import com.example.mywork.dto.ProductDTO;
@@ -33,20 +34,20 @@ public class ProductDAOImpl implements ProductDAO {
         }
     }
     public String getNextProductId() throws SQLException {
-        ResultSet rst = CrudUtil.execute("select productId from product order by productId desc limit 1");
+        ResultSet rst = SqlUtil.execute("select productId from product order by productId desc limit 1");
 
         if (rst.next()) {
-            String lastId = rst.getString(1); // Last customer ID
-            String substring = lastId.substring(1); // Extract the numeric part
-            int i = Integer.parseInt(substring); // Convert the numeric part to integer
-            int newIdIndex = i + 1; // Increment the number by 1
-            return String.format("P%03d", newIdIndex); // Return the new customer ID in format Cnnn
+            String lastId = rst.getString(1);
+            String substring = lastId.substring(1);
+            int i = Integer.parseInt(substring);
+            int newIdIndex = i + 1;
+            return String.format("P%03d", newIdIndex);
         }
-        return "P001"; // Return the default customer ID if no data is found
+        return "P001";
     }
 
     public boolean save(Product productDTO) throws SQLException {
-        return CrudUtil.execute(
+        return SqlUtil.execute(
                 "insert into product values (?,?,?,?,?)",
                 productDTO.getProductId(),
                 productDTO.getName(),
@@ -57,8 +58,7 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     public ArrayList<Product> getAll() throws SQLException {
-        ResultSet rst = CrudUtil.execute("select * from product");
-
+        ResultSet rst = SqlUtil.execute("select * from product");
         ArrayList<Product> productDTOS = new ArrayList<>();
 
         while (rst.next()) {
@@ -80,7 +80,7 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     public boolean update(Product productDTO) throws SQLException {
-        return CrudUtil.execute(
+        return SqlUtil.execute(
                 "update product set name=?, price=?, description=? , qty = ? where productId=?",
                 productDTO.getName(),
                 productDTO.getPrice(),
@@ -90,20 +90,17 @@ public class ProductDAOImpl implements ProductDAO {
         );
     }
 
-
     public boolean delete(String productId) throws SQLException {
-        return CrudUtil.execute("delete from product where productId=?", productId);
+        return SqlUtil.execute("delete from product where productId=?", productId);
     }
 
     public ArrayList<String> getAllProductIds() throws SQLException {
-        ResultSet rst = CrudUtil.execute("select productId from product");
-
+        ResultSet rst = SqlUtil.execute("select productId from product");
         ArrayList<String> productId = new ArrayList<>();
 
         while (rst.next()) {
             productId.add(rst.getString(1));
         }
-
         return productId;
     }
 
