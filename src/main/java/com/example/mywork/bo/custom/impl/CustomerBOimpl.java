@@ -3,10 +3,13 @@ import com.example.mywork.DAO.DAOFactory;
 import com.example.mywork.DAO.custom.CustomerDAO;
 import com.example.mywork.bo.custom.CustomerBO;
 import com.example.mywork.dto.CustomerDTO;
+import com.example.mywork.entity.Customer;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CustomerBOimpl implements CustomerBO {
+
 
     CustomerDAO customerDAO = (CustomerDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.CUSTOMER);
 
@@ -17,17 +20,22 @@ public class CustomerBOimpl implements CustomerBO {
 
     @Override
     public boolean save(CustomerDTO DTO) throws SQLException {
-        return customerDAO.save(DTO);
+        return customerDAO.save(new Customer(DTO.getCustomerId(),DTO.getName(),DTO.getAddress(),DTO.getContact()));
     }
 
     @Override
     public ArrayList<CustomerDTO> getAll() throws SQLException {
-        return customerDAO.getAll();
+        ArrayList<Customer> all = customerDAO.getAll();
+        ArrayList<CustomerDTO> customerDTOs = new ArrayList<>();
+        for (Customer customer : all) {
+            customerDTOs.add(new CustomerDTO(customer.getCustomerId(),customer.getName(),customer.getAddress(),customer.getContact()));
+        }
+        return customerDTOs;
     }
 
     @Override
     public boolean update(CustomerDTO DTO) throws SQLException {
-        return customerDAO.update(DTO);
+        return customerDAO.update(new Customer(DTO.getCustomerId(),DTO.getName(),DTO.getAddress(),DTO.getContact()));
     }
 
     @Override

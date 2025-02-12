@@ -4,6 +4,7 @@ import com.example.mywork.DAO.DAOFactory;
 import com.example.mywork.DAO.custom.MetirialDAO;
 import com.example.mywork.bo.custom.MetirialBO;
 import com.example.mywork.dto.MetirialDTO;
+import com.example.mywork.entity.Metirial;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,22 +19,26 @@ public class MetirialBOimpl implements MetirialBO {
 
     @Override
     public boolean save(MetirialDTO DTO) throws SQLException {
-        return metirialDAO.save(DTO);
+        return metirialDAO.save(new Metirial(DTO.getMetirialId(),DTO.getName(),DTO.getQty()));
     }
 
     @Override
     public ArrayList<MetirialDTO> getAll() throws SQLException {
-        return metirialDAO.getAll();
+        ArrayList<Metirial> metirials = metirialDAO.getAll();
+        ArrayList<MetirialDTO> metirialDTOS = new ArrayList<>();
+        for (Metirial metirial : metirials) {
+            metirialDTOS.add(new MetirialDTO(metirial.getMetirialId(),metirial.getName(),metirial.getQty()));
+        }
+        return metirialDTOS;
     }
 
     @Override
     public boolean update(MetirialDTO DTO) throws SQLException {
-        return metirialDAO.update(DTO);
+        return metirialDAO.update(new Metirial(DTO.getMetirialId(),DTO.getName(),DTO.getQty()));
     }
 
     @Override
     public boolean delete(String Id) throws SQLException {
         return metirialDAO.delete(Id);
     }
-
 }
