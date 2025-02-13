@@ -1,9 +1,6 @@
 package com.example.mywork.bo;
 
-import com.example.mywork.bo.custom.impl.CustomerBOimpl;
-import com.example.mywork.bo.custom.impl.EmployeeBOimpl;
-import com.example.mywork.bo.custom.impl.MetirialBOimpl;
-import com.example.mywork.bo.custom.impl.ProductBOimpl;
+import com.example.mywork.bo.custom.impl.*;
 
 public class BOFactory {
 
@@ -14,7 +11,7 @@ public class BOFactory {
         return boFactory==null?boFactory=new BOFactory():boFactory;
     }
     public enum BOType{
-        CUSTOMER,EMPLOYEE,METIRIAL,PRODUCT
+        CUSTOMER,EMPLOYEE,METIRIAL,PRODUCT,ORDERPRODUCT
 
     }
     public SuperBO getBO(BOType botype){
@@ -27,6 +24,8 @@ public class BOFactory {
                 return new MetirialBOimpl();
             case PRODUCT:
                 return new ProductBOimpl();
+                case ORDERPRODUCT:
+                    return new OrderDetailBOimpl();
             default:
                 return null;
         }

@@ -1,16 +1,17 @@
 package com.example.mywork.controller;
 import com.example.mywork.DAO.custom.CustomerDAO;
-import com.example.mywork.DAO.custom.OrderDetailDAO;
 import com.example.mywork.DAO.custom.ProductDAO;
 import com.example.mywork.DAO.custom.impl.CustomerDAOImpl;
 import com.example.mywork.DAO.custom.impl.OrderDetailDAOImpl;
 import com.example.mywork.DAO.custom.impl.OrdersDAOImpl;
 import com.example.mywork.DAO.custom.impl.ProductDAOImpl;
+import com.example.mywork.bo.BOFactory;
+import com.example.mywork.bo.custom.OrderDetailBO;
 import com.example.mywork.db.DBConnection;
-import com.example.mywork.dto.OrderDetailDTO;
 import com.example.mywork.dto.OrdersDTO;
 import com.example.mywork.dto.PaymentDTO;
 import com.example.mywork.dto.tm.CartTM;
+import com.example.mywork.entity.OrderDetail;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -97,6 +98,8 @@ public class Orders implements Initializable {
     CustomerDAO customerDAO = new CustomerDAOImpl();
     ProductDAO productDAO = new ProductDAOImpl();
 
+    OrderDetailBO orderDetailBO = (OrderDetailBO) BOFactory.getInstance().getBO(BOFactory.BOType.ORDERPRODUCT);
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ordersModel = new OrdersDAOImpl();
@@ -138,7 +141,7 @@ public class Orders implements Initializable {
     }
 
     private void refreshPage() throws SQLException {
-        String ii = orderDetailModel.getNextOrderId();
+        String ii = orderDetailBO.getNextOrderId();
         txtOrderId.setText(ii);
         txtDate.setText(LocalDate.now().toString());
 
@@ -204,7 +207,7 @@ public class Orders implements Initializable {
         double total = unitPrice * cartQty;
 
         OrdersDTO ordersDTO = new OrdersDTO(ss,date,selectedCustomerId);
-        OrderDetailDTO orderDetailDTO =new OrderDetailDTO(ss,selectedProductId,date,cartQty,unitPrice);
+        OrderDetail orderDetailDTO =new OrderDetail(ss,selectedProductId,date,cartQty,unitPrice);
 
         try {
             String resp = ordersModel.insertAll(ordersDTO,orderDetailDTO,selectedProductId);

@@ -9,7 +9,7 @@ public class DAOFactory {
        return daoFactory==null?daoFactory=new DAOFactory():daoFactory;
     }
     public enum DAOType{
-        CUSTOMER,EMPLOYEE,METIRIAL,PRODUCT
+        CUSTOMER,EMPLOYEE,METIRIAL,PRODUCT,ORDERPRODUCT
 
     }
     public  CrudDAO getDAO(DAOType daoFactory){
@@ -22,6 +22,8 @@ public class DAOFactory {
                 return new MetirialDAOImpl();
             case PRODUCT:
                 return new ProductDAOImpl();
+                case ORDERPRODUCT:
+                    return new OrderDetailDAOImpl();
             default:
                 return null;
         }

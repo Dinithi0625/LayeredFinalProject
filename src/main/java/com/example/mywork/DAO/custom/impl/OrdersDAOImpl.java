@@ -5,6 +5,8 @@ import com.example.mywork.dto.OrderDetailDTO;
 import com.example.mywork.dto.OrdersDTO;
 import com.example.mywork.dto.PaymentDTO;
 import com.example.mywork.dto.tm.CartTM;
+import com.example.mywork.entity.OrderDetail;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +16,7 @@ import java.util.List;
 
 public class OrdersDAOImpl{
 
-    public String insertAll(OrdersDTO ordersDTO, OrderDetailDTO orderDetailDTO, String productId) throws SQLException {
+    public String insertAll(OrdersDTO ordersDTO, OrderDetail orderDetailDTO, String productId) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
         try {
 
