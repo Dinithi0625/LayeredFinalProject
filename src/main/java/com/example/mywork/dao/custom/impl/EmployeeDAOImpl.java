@@ -1,7 +1,8 @@
-package com.example.mywork.DAO.custom.impl;
-import com.example.mywork.DAO.SqlUtil;
-import com.example.mywork.DAO.custom.EmployeeDAO;
+package com.example.mywork.dao.custom.impl;
+import com.example.mywork.dao.SqlUtil;
+import com.example.mywork.dao.custom.EmployeeDAO;
 import com.example.mywork.entity.Employee;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -38,10 +39,10 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
         while (rst.next()) {
             Employee employeeDTO = new Employee(
-                    rst.getString(1),
-                    rst.getString(2),
-                    rst.getString(3),
-                    rst.getString(4)
+                    rst.getString(1),  // Customer ID
+                    rst.getString(2),  // Name
+                    rst.getString(3),  // Address
+                    rst.getString(4)   // Contact
             );
             employeeDTOS.add(employeeDTO);
         }

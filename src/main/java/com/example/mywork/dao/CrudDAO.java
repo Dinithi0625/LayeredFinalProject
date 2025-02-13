@@ -1,4 +1,4 @@
-package com.example.mywork.DAO;
+package com.example.mywork.dao;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

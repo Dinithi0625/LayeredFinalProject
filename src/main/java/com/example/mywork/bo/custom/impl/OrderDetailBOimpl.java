@@ -1,8 +1,8 @@
 package com.example.mywork.bo.custom.impl;
 
-import com.example.mywork.DAO.DAOFactory;
-import com.example.mywork.DAO.custom.OrderDetailDAO;
 import com.example.mywork.bo.custom.OrderDetailBO;
+import com.example.mywork.dao.DAOFactory;
+import com.example.mywork.dao.custom.OrderDetailDAO;
 import com.example.mywork.dto.OrderDetailDTO;
 
 import java.sql.SQLException;

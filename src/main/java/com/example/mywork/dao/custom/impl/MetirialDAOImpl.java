@@ -1,12 +1,14 @@
-package com.example.mywork.DAO.custom.impl;
-import com.example.mywork.DAO.SqlUtil;
-import com.example.mywork.DAO.custom.MetirialDAO;
+package com.example.mywork.dao.custom.impl;
+import com.example.mywork.dao.SqlUtil;
+import com.example.mywork.dao.custom.MetirialDAO;
 import com.example.mywork.entity.Metirial;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class MetirialDAOImpl implements MetirialDAO {
+
     public String getNextMetirialId() throws SQLException {
         ResultSet rst = SqlUtil.execute("select metirialId from metirial order by metirialId desc limit 1");
 
@@ -28,6 +30,7 @@ public class MetirialDAOImpl implements MetirialDAO {
                 metirialDTO.getQty()
         );
     }
+
     public ArrayList<Metirial> getAll() throws SQLException {
         ResultSet rst = SqlUtil.execute("select * from metirial");
         ArrayList<Metirial> list = new ArrayList<>();
@@ -59,7 +62,6 @@ public class MetirialDAOImpl implements MetirialDAO {
     public boolean delete(String metirialId) throws SQLException {
         return SqlUtil.execute("delete from metirial where metirialId=?", metirialId);
     }
-
 
 }
 

@@ -1,7 +1,9 @@
-package com.example.mywork.DAO.custom.impl;
-import com.example.mywork.DAO.SqlUtil;
-import com.example.mywork.DAO.custom.CustomerDAO;
+package com.example.mywork.dao.custom.impl;
+
+import com.example.mywork.dao.SqlUtil;
+import com.example.mywork.dao.custom.CustomerDAO;
 import com.example.mywork.entity.Customer;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,7 +25,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     public boolean save(Customer customerDTO) throws SQLException {
-        return SqlUtil.execute(
+            return SqlUtil.execute(
                 "insert into customer values (?,?,?,?)",
                 customerDTO.getCustomerId(),
                 customerDTO.getName(),
@@ -39,10 +41,10 @@ public class CustomerDAOImpl implements CustomerDAO {
 
         while (rst.next()) {
             Customer customerDTO = new Customer(
-                    rst.getString(1),
-                    rst.getString(2),
-                    rst.getString(3),
-                    rst.getString(4)
+                    rst.getString(1),  // Customer ID
+                    rst.getString(2),  // Name
+                    rst.getString(3),  // Address
+                    rst.getString(4)   // Contact
             );
             customerDTOS.add(customerDTO);
         }

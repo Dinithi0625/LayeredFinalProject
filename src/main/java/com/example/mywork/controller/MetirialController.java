@@ -1,12 +1,10 @@
 package com.example.mywork.controller;
 
-import com.example.mywork.DAO.DAOFactory;
-import com.example.mywork.DAO.custom.MetirialDAO;
 import com.example.mywork.bo.BOFactory;
 import com.example.mywork.bo.custom.MetirialBO;
+import com.example.mywork.dao.custom.impl.MetirialDAOImpl;
 import com.example.mywork.dto.MetirialDTO;
 import com.example.mywork.dto.tm.MetirialTM;
-import com.example.mywork.DAO.custom.impl.MetirialDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

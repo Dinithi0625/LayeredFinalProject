@@ -1,9 +1,7 @@
-package com.example.mywork.DAO.custom.impl;
-
-import com.example.mywork.DAO.SqlUtil;
-import com.example.mywork.DAO.custom.OrderDetailDAO;
+package com.example.mywork.dao.custom.impl;
+import com.example.mywork.dao.SqlUtil;
+import com.example.mywork.dao.custom.OrderDetailDAO;
 import com.example.mywork.entity.OrderDetail;
-import com.example.mywork.util.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

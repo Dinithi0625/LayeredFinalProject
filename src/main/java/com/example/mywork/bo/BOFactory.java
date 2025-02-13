@@ -11,7 +11,7 @@ public class BOFactory {
         return boFactory==null?boFactory=new BOFactory():boFactory;
     }
     public enum BOType{
-        CUSTOMER,EMPLOYEE,METIRIAL,PRODUCT,ORDERPRODUCT
+        CUSTOMER,EMPLOYEE,METIRIAL,PRODUCT,ORDERPRODUCT,ORDER
 
     }
     public SuperBO getBO(BOType botype){
@@ -26,6 +26,8 @@ public class BOFactory {
                 return new ProductBOimpl();
                 case ORDERPRODUCT:
                     return new OrderDetailBOimpl();
+                    case ORDER:
+                        return new OrdersBOimpl();
             default:
                 return null;
         }

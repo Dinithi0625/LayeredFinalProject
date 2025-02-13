@@ -1,5 +1,5 @@
-package com.example.mywork.DAO;
-import com.example.mywork.DAO.custom.impl.*;
+package com.example.mywork.dao;
+import com.example.mywork.dao.custom.impl.*;
 
 public class DAOFactory {
     private static DAOFactory daoFactory;
@@ -9,7 +9,7 @@ public class DAOFactory {
        return daoFactory==null?daoFactory=new DAOFactory():daoFactory;
     }
     public enum DAOType{
-        CUSTOMER,EMPLOYEE,METIRIAL,PRODUCT,ORDERPRODUCT
+        CUSTOMER,EMPLOYEE,METIRIAL,PRODUCT,ORDERPRODUCT,ORDERS
 
     }
     public  CrudDAO getDAO(DAOType daoFactory){
@@ -22,8 +22,10 @@ public class DAOFactory {
                 return new MetirialDAOImpl();
             case PRODUCT:
                 return new ProductDAOImpl();
-                case ORDERPRODUCT:
-                    return new OrderDetailDAOImpl();
+            case ORDERPRODUCT:
+                return new OrderDetailDAOImpl();
+                case ORDERS:
+                    return new OrdersDAOImpl();
             default:
                 return null;
         }

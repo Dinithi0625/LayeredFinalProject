@@ -1,4 +1,4 @@
-package com.example.mywork.DAO;
+package com.example.mywork.dao;
 
 import com.example.mywork.db.DBConnection;
 
@@ -16,4 +16,5 @@ public class SqlUtil {
         }
         return (T)(Boolean)(preparedStatement.executeUpdate() > 0);
     }
+
 }

@@ -1,9 +1,10 @@
 package com.example.mywork.controller;
+
 import com.example.mywork.bo.BOFactory;
 import com.example.mywork.bo.custom.EmployeeBO;
+import com.example.mywork.dao.custom.impl.EmployeeDAOImpl;
 import com.example.mywork.dto.EmployeeDTO;
 import com.example.mywork.dto.tm.EmployeeTM;
-import com.example.mywork.DAO.custom.impl.EmployeeDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -71,6 +73,7 @@ public class EmployeeController {
         }
     }
 
+
     private void refreshPage() throws SQLException {
 
         try {
@@ -80,6 +83,7 @@ public class EmployeeController {
             throw new RuntimeException(e);
         }
         btnSave.setDisable(false);
+
         btnUpdate.setDisable(true);
         btnDelete.setDisable(true);
 
@@ -272,4 +276,5 @@ public class EmployeeController {
         }
 
     }
+
 }

@@ -1,4 +1,5 @@
 package com.example.mywork.controller;
+
 import com.example.mywork.bo.BOFactory;
 import com.example.mywork.bo.custom.CustomerBO;
 import com.example.mywork.db.DBConnection;
@@ -14,9 +15,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.view.JasperViewer;
+
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
 
 public class CustomerController {
 
@@ -89,7 +91,7 @@ public class CustomerController {
         txtContact.setText("");
     }
 
-    //  CustomerDAOImpl customerModel = new CustomerDAOImpl();
+  //  CustomerDAOImpl customerModel = new CustomerDAOImpl();
 
     private void loadTableData() throws SQLException {
         ArrayList<CustomerDTO> customerDTOS = customerBO.getAll();
@@ -145,13 +147,13 @@ public class CustomerController {
         }
 
         CustomerDTO dto = new CustomerDTO(customerId,name,address,phone);
-        boolean isSaved = customerBO.save(dto);
-        if (isSaved) {
-            refreshPage();
-            new Alert(Alert.AlertType.INFORMATION, "Customer saved...!").show();
-        } else {
-            new Alert(Alert.AlertType.ERROR, "Fail to save customer...!").show();
-        }
+            boolean isSaved = customerBO.save(dto);
+            if (isSaved) {
+                refreshPage();
+                new Alert(Alert.AlertType.INFORMATION, "Customer saved...!").show();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Fail to save customer...!").show();
+            }
     }
 
 

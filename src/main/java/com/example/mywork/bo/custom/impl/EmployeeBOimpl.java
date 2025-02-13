@@ -1,14 +1,15 @@
 package com.example.mywork.bo.custom.impl;
-import com.example.mywork.DAO.DAOFactory;
-import com.example.mywork.DAO.custom.EmployeeDAO;
+
 import com.example.mywork.bo.custom.EmployeeBO;
+import com.example.mywork.dao.DAOFactory;
+import com.example.mywork.dao.custom.EmployeeDAO;
 import com.example.mywork.dto.EmployeeDTO;
 import com.example.mywork.entity.Employee;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class EmployeeBOimpl implements EmployeeBO {
-
     EmployeeDAO employeeDAO = (EmployeeDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.EMPLOYEE);
 
     @Override

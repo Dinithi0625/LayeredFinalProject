@@ -1,12 +1,9 @@
 package com.example.mywork.controller;
-import com.example.mywork.DAO.custom.CustomerDAO;
-import com.example.mywork.DAO.custom.ProductDAO;
-import com.example.mywork.DAO.custom.impl.CustomerDAOImpl;
-import com.example.mywork.DAO.custom.impl.OrderDetailDAOImpl;
-import com.example.mywork.DAO.custom.impl.OrdersDAOImpl;
-import com.example.mywork.DAO.custom.impl.ProductDAOImpl;
+
 import com.example.mywork.bo.BOFactory;
 import com.example.mywork.bo.custom.OrderDetailBO;
+import com.example.mywork.bo.custom.OrdersBO;
+import com.example.mywork.dao.custom.impl.OrdersDAOImpl;
 import com.example.mywork.db.DBConnection;
 import com.example.mywork.dto.OrdersDTO;
 import com.example.mywork.dto.PaymentDTO;
@@ -95,14 +92,12 @@ public class Orders implements Initializable {
     @FXML
     private Button btnBill;
 
-    CustomerDAO customerDAO = new CustomerDAOImpl();
-    ProductDAO productDAO = new ProductDAOImpl();
-
+    OrdersBO ordersBO = (OrdersBO) BOFactory.getInstance().getBO(BOFactory.BOType.ORDER);
     OrderDetailBO orderDetailBO = (OrderDetailBO) BOFactory.getInstance().getBO(BOFactory.BOType.ORDERPRODUCT);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ordersModel = new OrdersDAOImpl();
+        ordersModel = (OrdersDAOImpl) new OrdersDAOImpl();
         setCellValues();
         try {
             refreshPage();
@@ -110,10 +105,6 @@ public class Orders implements Initializable {
             throw new RuntimeException(e);
         }
     }
-
-    private final OrderDetailDAOImpl orderDetailModel = new OrderDetailDAOImpl();
-    private final CustomerDAOImpl customerModel = new CustomerDAOImpl();
-    private final ProductDAOImpl productModel = new ProductDAOImpl();
 
     private void setCellValues() {
         
@@ -129,9 +120,9 @@ public class Orders implements Initializable {
     private void loadTablesOrders() {
         ObservableList<CartTM> osli = FXCollections.observableArrayList();
         try {
-            List<CartTM> sli = ordersModel.loadtDetails();
+            List<CartTM> sli = ordersBO.loadtDetails();
             osli.addAll(sli);
-            double price = ordersModel.getAllPrice();
+            double price = ordersBO.getAllPrice();
             txtTotPrice.setText(""+price);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -158,14 +149,14 @@ public class Orders implements Initializable {
     }
 
     private void loadCustomerId() throws SQLException {
-        ArrayList<String> customerIds = customerModel.getAllIds();
+        ArrayList<String> customerIds = ordersBO.getAllICustomerIds();
         ObservableList<String> observableList = FXCollections.observableArrayList();
         observableList.addAll(customerIds);
         cmbCustomerId.setItems(observableList);
     }
 
     private void loadProductId() throws SQLException {
-        ArrayList<String> productIds = productModel.getAllProductIds();
+        ArrayList<String> productIds = ordersBO.getAllIProductIds();
         ObservableList<String> observableList = FXCollections.observableArrayList();
         observableList.addAll(productIds);
         cmbProdctId.setItems(observableList);
@@ -209,6 +200,7 @@ public class Orders implements Initializable {
         OrdersDTO ordersDTO = new OrdersDTO(ss,date,selectedCustomerId);
         OrderDetail orderDetailDTO =new OrderDetail(ss,selectedProductId,date,cartQty,unitPrice);
 
+//transaction eke insertAll
         try {
             String resp = ordersModel.insertAll(ordersDTO,orderDetailDTO,selectedProductId);
             loadTablesOrders();
@@ -220,7 +212,7 @@ public class Orders implements Initializable {
 
     }
 
-
+//transaction
     @FXML
     void buttonPlaceOrderOnAction(ActionEvent event) throws SQLException {
         String ordId =txtOrderId.getText();
@@ -242,7 +234,7 @@ public class Orders implements Initializable {
         String  mm = cmbProdctId.getValue();
         int qty = Integer.parseInt(txtQty.getText());
         try {
-            double price = ordersModel.getpriceqty(mm);
+            double price = ordersBO.getpriceqty(mm);
             txtUnitPrice.setText(""+(price*qty));
         } catch (SQLException e) {
             throw new RuntimeException(e);

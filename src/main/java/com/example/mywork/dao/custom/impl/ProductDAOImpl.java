@@ -1,8 +1,9 @@
-package com.example.mywork.DAO.custom.impl;
-import com.example.mywork.DAO.SqlUtil;
-import com.example.mywork.DAO.custom.ProductDAO;
+package com.example.mywork.dao.custom.impl;
+import com.example.mywork.dao.SqlUtil;
+import com.example.mywork.dao.custom.ProductDAO;
 import com.example.mywork.db.DBConnection;
 import com.example.mywork.entity.Product;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -60,20 +61,15 @@ public class ProductDAOImpl implements ProductDAO {
 
         while (rst.next()) {
             Product productDTO = new Product(
-                    rst.getString(1),
-                    rst.getString(2),
-                    rst.getDouble(3),
+                    rst.getString(1),  // Customer ID
+                    rst.getString(2),  // Name
+                    rst.getDouble(3),  // Address
                     rst.getString(4),
-                    rst.getInt(5)
+                    rst.getInt(5)// Contact
             );
             productDTOS.add(productDTO);
         }
         return productDTOS;
-    }
-
-    @Override
-    public ArrayList<String> getAllIds() throws SQLException {
-        return null;
     }
 
     public boolean update(Product productDTO) throws SQLException {
@@ -87,17 +83,19 @@ public class ProductDAOImpl implements ProductDAO {
         );
     }
 
+
     public boolean delete(String productId) throws SQLException {
         return SqlUtil.execute("delete from product where productId=?", productId);
     }
 
-    public ArrayList<String> getAllProductIds() throws SQLException {
+    public ArrayList<String> getAllIds() throws SQLException {
         ResultSet rst = SqlUtil.execute("select productId from product");
         ArrayList<String> productId = new ArrayList<>();
 
         while (rst.next()) {
             productId.add(rst.getString(1));
         }
+
         return productId;
     }
 

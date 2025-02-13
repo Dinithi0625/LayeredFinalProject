@@ -1,10 +1,11 @@
 package com.example.mywork.bo.custom.impl;
 
-import com.example.mywork.DAO.DAOFactory;
-import com.example.mywork.DAO.custom.MetirialDAO;
 import com.example.mywork.bo.custom.MetirialBO;
+import com.example.mywork.dao.DAOFactory;
+import com.example.mywork.dao.custom.MetirialDAO;
 import com.example.mywork.dto.MetirialDTO;
 import com.example.mywork.entity.Metirial;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 

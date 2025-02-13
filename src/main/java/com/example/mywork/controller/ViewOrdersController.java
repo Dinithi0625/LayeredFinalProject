@@ -1,6 +1,6 @@
 package com.example.mywork.controller;
 
-import com.example.mywork.DAO.custom.impl.ViewOrdersDAOImpl;
+import com.example.mywork.dao.custom.impl.ViewOrdersDAOImpl;
 import com.example.mywork.dto.tm.OrderProductTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

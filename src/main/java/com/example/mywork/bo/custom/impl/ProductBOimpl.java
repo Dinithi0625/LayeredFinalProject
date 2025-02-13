@@ -1,10 +1,11 @@
 package com.example.mywork.bo.custom.impl;
 
-import com.example.mywork.DAO.DAOFactory;
-import com.example.mywork.DAO.custom.ProductDAO;
 import com.example.mywork.bo.custom.ProductBO;
+import com.example.mywork.dao.DAOFactory;
+import com.example.mywork.dao.custom.ProductDAO;
 import com.example.mywork.dto.ProductDTO;
 import com.example.mywork.entity.Product;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.example.mywork.DAO.custom.impl;
+package com.example.mywork.dao.custom.impl;
 
 import com.example.mywork.db.DBConnection;
 import com.example.mywork.dto.tm.OrderProductTM;

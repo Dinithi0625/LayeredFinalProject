@@ -1,7 +1,4 @@
 package com.example.mywork.controller;
-import com.example.mywork.DAO.DAOFactory;
-import com.example.mywork.DAO.custom.ProductDAO;
-import com.example.mywork.DAO.custom.impl.ProductDAOImpl;
 import com.example.mywork.bo.BOFactory;
 import com.example.mywork.bo.custom.ProductBO;
 import com.example.mywork.db.DBConnection;
@@ -89,7 +86,7 @@ public class ProductController {
 
     private void refreshPage() throws SQLException {
         try {
-            loadNextProductId();
+             loadNextProductId();
             loadTableData();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -103,7 +100,7 @@ public class ProductController {
         txtDescription.setText("");
     }
 
-    // ProductDAOImpl productModel = new ProductDAOImpl();
+   // ProductDAOImpl productModel = new ProductDAOImpl();
 
     private void loadTableData() throws SQLException {
         ArrayList<ProductDTO> productDTOS = productBO.getAll();
@@ -275,4 +272,5 @@ public class ProductController {
             btnUpdateItem.setDisable(false);
         }
     }
+
 }

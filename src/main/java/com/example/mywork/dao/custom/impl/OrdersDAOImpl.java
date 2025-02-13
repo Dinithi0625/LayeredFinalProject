@@ -1,11 +1,12 @@
-package com.example.mywork.DAO.custom.impl;
-import com.example.mywork.DAO.custom.OrdersDAO;
+package com.example.mywork.dao.custom.impl;
+
+import com.example.mywork.dao.custom.OrdersDAO;
 import com.example.mywork.db.DBConnection;
-import com.example.mywork.dto.OrderDetailDTO;
 import com.example.mywork.dto.OrdersDTO;
 import com.example.mywork.dto.PaymentDTO;
 import com.example.mywork.dto.tm.CartTM;
 import com.example.mywork.entity.OrderDetail;
+import com.example.mywork.entity.Orders;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,7 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrdersDAOImpl{
+public class OrdersDAOImpl implements OrdersDAO {
 
     public String insertAll(OrdersDTO ordersDTO, OrderDetail orderDetailDTO, String productId) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
@@ -151,6 +152,30 @@ public class OrdersDAOImpl{
     }
 
 
+    @Override
+    public boolean save(Orders DTO) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public ArrayList<Orders> getAll() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public ArrayList<String> getAllIds() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public boolean update(Orders DTO) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String Id) throws SQLException {
+        return false;
+    }
 }
 
 

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface ProductBO extends SuperBO {
+
     String getNextProductId() throws SQLException;
 
     boolean save(ProductDTO DTO) throws SQLException;
