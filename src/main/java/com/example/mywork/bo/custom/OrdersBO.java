@@ -1,8 +1,8 @@
 package com.example.mywork.bo.custom;
-
 import com.example.mywork.bo.SuperBO;
-import com.example.mywork.dto.OrdersDTO;
 import com.example.mywork.dto.tm.CartTM;
+import com.example.mywork.entity.Order;
+import com.example.mywork.entity.OrderDetail;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,12 +16,16 @@ public interface OrdersBO extends SuperBO {
 
     double getpriceqty(String mm) throws SQLException;
 
-    boolean save(OrdersDTO DTO) throws SQLException;
+    boolean save(Order DTO) throws SQLException;
 
-    ArrayList<OrdersDTO> getAll() throws SQLException;
+    ArrayList<Order> getAll() throws SQLException;
 
     ArrayList<String> getAllICustomerIds() throws SQLException;
 
     ArrayList<String> getAllIProductIds() throws SQLException;
 
-}
+    String insertAll(Order ordersDTO, OrderDetail orderDetailDTO, String productId) throws SQLException;
+
+
+
+    }

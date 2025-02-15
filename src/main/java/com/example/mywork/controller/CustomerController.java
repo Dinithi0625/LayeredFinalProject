@@ -3,8 +3,8 @@ package com.example.mywork.controller;
 import com.example.mywork.bo.BOFactory;
 import com.example.mywork.bo.custom.CustomerBO;
 import com.example.mywork.db.DBConnection;
-import com.example.mywork.dto.CustomerDTO;
 import com.example.mywork.dto.tm.CustomerTM;
+import com.example.mywork.entity.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,7 +32,7 @@ public class CustomerController {
     private Button btnUpdate;
 
     @FXML
-    private TableColumn<CustomerDTO, String> colAddress;
+    private TableColumn<Customer, String> colAddress;
 
     @FXML
     private TableColumn<CustomerTM, String> colContact;
@@ -94,9 +94,9 @@ public class CustomerController {
   //  CustomerDAOImpl customerModel = new CustomerDAOImpl();
 
     private void loadTableData() throws SQLException {
-        ArrayList<CustomerDTO> customerDTOS = customerBO.getAll();
+        ArrayList<Customer> customerDTOS = customerBO.getAll();
         ObservableList<CustomerTM> customerTMS = FXCollections.observableArrayList();
-        for (CustomerDTO customerDTO : customerDTOS) {
+        for (Customer customerDTO : customerDTOS) {
             CustomerTM customerTM = new CustomerTM(
                     customerDTO.getCustomerId(),
                     customerDTO.getName(),
@@ -146,7 +146,7 @@ public class CustomerController {
             txtContact.setStyle(txtContact.getStyle() + ";-fx-border-color: red;");
         }
 
-        CustomerDTO dto = new CustomerDTO(customerId,name,address,phone);
+        Customer dto = new Customer(customerId,name,address,phone);
             boolean isSaved = customerBO.save(dto);
             if (isSaved) {
                 refreshPage();
@@ -189,7 +189,7 @@ public class CustomerController {
             txtContact.setStyle(txtContact.getStyle() + ";-fx-border-color: red;");
         }
 
-        CustomerDTO dto = new CustomerDTO(customerId,name,address,phone);
+        Customer dto = new Customer(customerId,name,address,phone);
 
         boolean isSaved = customerBO.update(dto);
         if (isSaved) {
@@ -232,7 +232,7 @@ public class CustomerController {
             txtContact.setStyle(txtContact.getStyle() + ";-fx-border-color: red;");
         }
 
-        CustomerDTO dto = new CustomerDTO(customerId,name,address,phone);
+        Customer dto = new Customer(customerId,name,address,phone);
         boolean isDeleted = customerBO.delete(customerId);
 
         if (isDeleted) {

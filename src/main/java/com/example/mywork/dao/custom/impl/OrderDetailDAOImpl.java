@@ -1,4 +1,5 @@
 package com.example.mywork.dao.custom.impl;
+
 import com.example.mywork.dao.SqlUtil;
 import com.example.mywork.dao.custom.OrderDetailDAO;
 import com.example.mywork.entity.OrderDetail;
@@ -24,7 +25,13 @@ public class OrderDetailDAOImpl implements OrderDetailDAO {
 
     @Override
     public boolean save(OrderDetail DTO) throws SQLException {
-        return false;
+        return SqlUtil.execute("INSERT INTO orderproduct (orderId, productId, date, qty, price) VALUES (?, ?, ?, ?, ?)",
+                DTO.getOrderId(),
+                DTO.getProductId(),
+                DTO.getDate(),
+                DTO.getQty(),
+                DTO.getPrice()
+        );
     }
 
     @Override

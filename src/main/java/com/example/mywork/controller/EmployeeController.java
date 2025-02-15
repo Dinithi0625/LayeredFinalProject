@@ -3,8 +3,8 @@ package com.example.mywork.controller;
 import com.example.mywork.bo.BOFactory;
 import com.example.mywork.bo.custom.EmployeeBO;
 import com.example.mywork.dao.custom.impl.EmployeeDAOImpl;
-import com.example.mywork.dto.EmployeeDTO;
 import com.example.mywork.dto.tm.EmployeeTM;
+import com.example.mywork.entity.Employee;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,16 +29,16 @@ public class EmployeeController {
     private Button btnUpdate;
 
     @FXML
-    private TableColumn<EmployeeDTO, String> colAddress;
+    private TableColumn<Employee, String> colAddress;
 
     @FXML
-    private TableColumn<EmployeeDTO, String> colContact;
+    private TableColumn<Employee, String> colContact;
 
     @FXML
-    private TableColumn<EmployeeDTO, String> colEmployeeId;
+    private TableColumn<Employee, String> colEmployeeId;
 
     @FXML
-    private TableColumn<EmployeeDTO, String> colName;
+    private TableColumn<Employee, String> colName;
 
     @FXML
     private Label lblEmployeeId;
@@ -95,12 +95,12 @@ public class EmployeeController {
     EmployeeDAOImpl employeeModel = new EmployeeDAOImpl();
 
     private void loadTableData() throws SQLException {
-        ArrayList<EmployeeDTO> employeeDTOS = employeeBO.getAll();
+        ArrayList<Employee> employeeDTOS = employeeBO.getAll();
 
         ObservableList<EmployeeTM> employeeTMS = FXCollections.observableArrayList();
 
 
-        for (EmployeeDTO employeeDTO : employeeDTOS) {
+        for (Employee employeeDTO : employeeDTOS) {
             EmployeeTM employeeTM = new EmployeeTM(
                     employeeDTO.getEmployeeId(),
                     employeeDTO.getName(),
@@ -154,7 +154,7 @@ public class EmployeeController {
             txtContact.setStyle(txtContact.getStyle() + ";-fx-border-color: red;");
         }
 
-        EmployeeDTO dto = new EmployeeDTO(employeeId,name,address,phone);
+        Employee dto = new Employee(employeeId,name,address,phone);
         boolean isDeleted = employeeBO.delete(employeeId);
 
         if (isDeleted) {
@@ -201,7 +201,7 @@ public class EmployeeController {
             txtContact.setStyle(txtContact.getStyle() + ";-fx-border-color: red;");
         }
 
-        EmployeeDTO dto = new EmployeeDTO(employeeId,name,address,phone);
+        Employee dto = new Employee(employeeId,name,address,phone);
 
         boolean isSaved = employeeBO.save(dto);
         if (isSaved) {
@@ -248,7 +248,7 @@ public class EmployeeController {
             txtContact.setStyle(txtContact.getStyle() + ";-fx-border-color: red;");
         }
 
-        EmployeeDTO dto = new EmployeeDTO(employeeId,name,address,phone);
+        Employee dto = new Employee(employeeId,name,address,phone);
 
         boolean isUpdted = employeeBO.update(dto);
         if (isUpdted) {

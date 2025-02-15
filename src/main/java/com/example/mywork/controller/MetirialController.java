@@ -3,8 +3,8 @@ package com.example.mywork.controller;
 import com.example.mywork.bo.BOFactory;
 import com.example.mywork.bo.custom.MetirialBO;
 import com.example.mywork.dao.custom.impl.MetirialDAOImpl;
-import com.example.mywork.dto.MetirialDTO;
 import com.example.mywork.dto.tm.MetirialTM;
+import com.example.mywork.entity.Metirial;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -84,12 +84,12 @@ public class MetirialController {
     MetirialDAOImpl metirialModel = new MetirialDAOImpl();
 
     private void loadTableData() throws SQLException {
-        ArrayList<MetirialDTO> metirialDTOS = metirialBO.getAll();
+        ArrayList<Metirial> metirialDTOS = metirialBO.getAll();
 
         ObservableList<MetirialTM> metirialTMS = FXCollections.observableArrayList();
 
 
-        for (MetirialDTO metirialDTO : metirialDTOS) {
+        for (Metirial metirialDTO : metirialDTOS) {
             MetirialTM metirialTM = new MetirialTM(
                     metirialDTO.getMetirialId(),
                     metirialDTO.getName(),
@@ -132,7 +132,7 @@ public class MetirialController {
             System.out.println("Invalid qty...");
         }
 
-        MetirialDTO dto = new MetirialDTO(metirialId , name , qty);
+        Metirial dto = new Metirial(metirialId , name , qty);
 
         boolean isDeleted = metirialBO.delete(metirialId);
 
@@ -170,7 +170,7 @@ public class MetirialController {
             System.out.println("Invalid qty...");
         }
 
-        MetirialDTO dto = new MetirialDTO(metirialId,name,qty);
+        Metirial dto = new Metirial(metirialId,name,qty);
 
         boolean isSaved = metirialBO.save(dto);
         if (isSaved) {
@@ -206,7 +206,7 @@ public class MetirialController {
             System.out.println("Invalid qty...");
         }
 
-        MetirialDTO dto = new MetirialDTO(metirialId,name,qty);
+        Metirial dto = new Metirial(metirialId,name,qty);
 
         boolean isUpdate = metirialBO.update(dto);
         if (isUpdate) {

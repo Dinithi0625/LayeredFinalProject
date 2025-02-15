@@ -3,7 +3,6 @@ package com.example.mywork.bo.custom.impl;
 import com.example.mywork.bo.custom.ProductBO;
 import com.example.mywork.dao.DAOFactory;
 import com.example.mywork.dao.custom.ProductDAO;
-import com.example.mywork.dto.ProductDTO;
 import com.example.mywork.entity.Product;
 
 import java.sql.SQLException;
@@ -19,22 +18,22 @@ public class ProductBOimpl implements ProductBO {
     }
 
     @Override
-    public boolean save(ProductDTO DTO) throws SQLException {
+    public boolean save(Product DTO) throws SQLException {
         return productDAO.save(new Product(DTO.getProductId(),DTO.getName(),DTO.getPrice(),DTO.getDescription(),DTO.getQty()));
     }
 
     @Override
-    public ArrayList<ProductDTO> getAll() throws SQLException {
+    public ArrayList<Product> getAll() throws SQLException {
         ArrayList<Product> products = productDAO.getAll();
-        ArrayList<ProductDTO> productDTOs = new ArrayList<>();
+        ArrayList<Product> productDTOs = new ArrayList<>();
         for (Product product : products) {
-            productDTOs.add(new ProductDTO(product.getProductId(),product.getName(),product.getPrice(),product.getDescription(),product.getQty()));
+            productDTOs.add(new Product(product.getProductId(),product.getName(),product.getPrice(),product.getDescription(),product.getQty()));
         }
         return productDTOs;
     }
 
     @Override
-    public boolean update(ProductDTO DTO) throws SQLException {
+    public boolean update(Product DTO) throws SQLException {
         return productDAO.update(new Product(DTO.getProductId(),DTO.getName(),DTO.getPrice(),DTO.getDescription(),DTO.getQty()));
     }
 

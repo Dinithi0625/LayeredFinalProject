@@ -3,7 +3,6 @@ package com.example.mywork.bo.custom.impl;
 import com.example.mywork.bo.custom.EmployeeBO;
 import com.example.mywork.dao.DAOFactory;
 import com.example.mywork.dao.custom.EmployeeDAO;
-import com.example.mywork.dto.EmployeeDTO;
 import com.example.mywork.entity.Employee;
 
 import java.sql.SQLException;
@@ -18,22 +17,22 @@ public class EmployeeBOimpl implements EmployeeBO {
     }
 
     @Override
-    public boolean save(EmployeeDTO DTO) throws SQLException {
+    public boolean save(Employee DTO) throws SQLException {
         return employeeDAO.save(new Employee(DTO.getEmployeeId(),DTO.getName(),DTO.getAddress(),DTO.getContact()));
     }
 
     @Override
-    public ArrayList<EmployeeDTO> getAll() throws SQLException {
+    public ArrayList<Employee> getAll() throws SQLException {
         ArrayList<Employee> employees =employeeDAO.getAll();
-        ArrayList<EmployeeDTO> employeeDTOS = new ArrayList<>();
+        ArrayList<Employee> employeeDTOS = new ArrayList<>();
         for (Employee employee : employees) {
-            employeeDTOS.add(new EmployeeDTO(employee.getEmployeeId(),employee.getName(),employee.getAddress(),employee.getContact()));
+            employeeDTOS.add(new Employee(employee.getEmployeeId(),employee.getName(),employee.getAddress(),employee.getContact()));
         }
         return employeeDTOS;
     }
 
     @Override
-    public boolean update(EmployeeDTO DTO) throws SQLException {
+    public boolean update(Employee DTO) throws SQLException {
         return employeeDAO.update(new Employee(DTO.getEmployeeId(),DTO.getName(),DTO.getAddress(),DTO.getContact()));
     }
 

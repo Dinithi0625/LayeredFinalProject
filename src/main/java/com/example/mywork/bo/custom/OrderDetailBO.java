@@ -1,7 +1,7 @@
 package com.example.mywork.bo.custom;
 
 import com.example.mywork.bo.SuperBO;
-import com.example.mywork.dto.OrderDetailDTO;
+import com.example.mywork.entity.OrderDetail;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -9,11 +9,11 @@ import java.util.ArrayList;
 public interface OrderDetailBO extends SuperBO {
     String getNextOrderId() throws SQLException;
 
-    boolean save(OrderDetailDTO DTO) throws SQLException;
+    boolean save(OrderDetail DTO) throws SQLException;
 
-    ArrayList<OrderDetailDTO> getAll() throws SQLException;
+    ArrayList<OrderDetail> getAll() throws SQLException;
 
-    boolean update(OrderDetailDTO DTO) throws SQLException;
+    boolean update(OrderDetail DTO) throws SQLException;
 
     boolean delete(String Id) throws SQLException;
 }

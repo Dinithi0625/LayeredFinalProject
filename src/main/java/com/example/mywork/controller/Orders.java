@@ -5,10 +5,10 @@ import com.example.mywork.bo.custom.OrderDetailBO;
 import com.example.mywork.bo.custom.OrdersBO;
 import com.example.mywork.dao.custom.impl.OrdersDAOImpl;
 import com.example.mywork.db.DBConnection;
-import com.example.mywork.dto.OrdersDTO;
-import com.example.mywork.dto.PaymentDTO;
 import com.example.mywork.dto.tm.CartTM;
+import com.example.mywork.entity.Order;
 import com.example.mywork.entity.OrderDetail;
+import com.example.mywork.entity.Payment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -97,7 +97,7 @@ public class Orders implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ordersModel = (OrdersDAOImpl) new OrdersDAOImpl();
+       // ordersModel = (OrdersDAOImpl) new OrdersDAOImpl();
         setCellValues();
         try {
             refreshPage();
@@ -197,12 +197,12 @@ public class Orders implements Initializable {
         double unitPrice = Double.parseDouble(txtUnitPrice.getText());
         double total = unitPrice * cartQty;
 
-        OrdersDTO ordersDTO = new OrdersDTO(ss,date,selectedCustomerId);
+        Order ordersDTO = new Order(ss,date,selectedCustomerId);
         OrderDetail orderDetailDTO =new OrderDetail(ss,selectedProductId,date,cartQty,unitPrice);
 
 //transaction eke insertAll
         try {
-            String resp = ordersModel.insertAll(ordersDTO,orderDetailDTO,selectedProductId);
+            String resp = ordersBO.insertAll(ordersDTO,orderDetailDTO,selectedProductId);
             loadTablesOrders();
             refreshPage();
             JOptionPane.showMessageDialog(null, "Save Status: " + resp, "Save Status", JOptionPane.INFORMATION_MESSAGE);
@@ -219,7 +219,7 @@ public class Orders implements Initializable {
         double price = Double.parseDouble(txtTotPrice.getText());
         String date = txtDate.getText();
 
-        PaymentDTO paymentDTO = new PaymentDTO(price,date,ordId);
+        Payment paymentDTO = new Payment(price,date,ordId);
         try {
             String rsp = ordersModel.insertPayment(paymentDTO);
             loadTablesOrders();

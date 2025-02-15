@@ -2,8 +2,8 @@ package com.example.mywork.controller;
 import com.example.mywork.bo.BOFactory;
 import com.example.mywork.bo.custom.ProductBO;
 import com.example.mywork.db.DBConnection;
-import com.example.mywork.dto.ProductDTO;
 import com.example.mywork.dto.tm.ProductTM;
+import com.example.mywork.entity.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -103,9 +103,9 @@ public class ProductController {
    // ProductDAOImpl productModel = new ProductDAOImpl();
 
     private void loadTableData() throws SQLException {
-        ArrayList<ProductDTO> productDTOS = productBO.getAll();
+        ArrayList<Product> productDTOS = productBO.getAll();
         ObservableList<ProductTM> productTMS = FXCollections.observableArrayList();
-        for (ProductDTO productDTO : productDTOS) {
+        for (Product productDTO : productDTOS) {
             ProductTM productTM = new ProductTM(
                     productDTO.getProductId(),
                     productDTO.getName(),
@@ -152,7 +152,7 @@ public class ProductController {
             txtDescription.setStyle(txtDescription.getStyle() + ";-fx-border-color: red;");
         }
 
-        ProductDTO dto = new ProductDTO(productId, name, price, description,qty);
+        Product dto = new Product(productId, name, price, description,qty);
         boolean isDeleted = productBO.delete(productId);
 
         if (isDeleted) {
@@ -192,7 +192,7 @@ public class ProductController {
             txtDescription.setStyle(txtDescription.getStyle() + ";-fx-border-color: red;");
         }
 
-        ProductDTO dto = new ProductDTO(productId, name, price, description,qty);
+        Product dto = new Product(productId, name, price, description,qty);
         boolean isSaved = productBO.save(dto);
 
         if (isSaved) {
@@ -232,7 +232,7 @@ public class ProductController {
             txtDescription.setStyle(txtDescription.getStyle() + ";-fx-border-color: red;");
         }
 
-        ProductDTO dto = new ProductDTO(productId, name, price, description,qty);
+        Product dto = new Product(productId, name, price, description,qty);
         boolean isDeleted = productBO.update(dto);
 
         if (isDeleted) {

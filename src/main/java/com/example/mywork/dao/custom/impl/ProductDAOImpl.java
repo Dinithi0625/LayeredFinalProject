@@ -1,4 +1,5 @@
 package com.example.mywork.dao.custom.impl;
+
 import com.example.mywork.dao.SqlUtil;
 import com.example.mywork.dao.custom.ProductDAO;
 import com.example.mywork.db.DBConnection;
@@ -98,6 +99,11 @@ public class ProductDAOImpl implements ProductDAO {
 
         return productId;
     }
+//
+//    public boolean checkProduct(Product product) throws SQLException {
+//        SqlUtil.execute("UPDATE product SET qty = qty - ? WHERE productId = ?");
+//
+//    }
 
 }
 

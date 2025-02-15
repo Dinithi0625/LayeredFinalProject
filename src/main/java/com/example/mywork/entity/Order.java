@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 
-public class Orders {
+public class Order {
     private String orderId;
     private String date;
     private String custId;
