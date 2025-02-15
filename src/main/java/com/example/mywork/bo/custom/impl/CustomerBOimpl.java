@@ -4,7 +4,6 @@ import com.example.mywork.bo.custom.CustomerBO;
 import com.example.mywork.dao.DAOFactory;
 import com.example.mywork.dao.custom.CustomerDAO;
 import com.example.mywork.entity.Customer;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 
